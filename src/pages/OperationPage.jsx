@@ -28,6 +28,12 @@ export const OperationPage = () => {
       description: "Gestion de Compras",
       path: "/menu",
     },
+    {
+      icon: <OrderIcon />,
+      name: "Chef",
+      description: "Pedidos en Cocina",
+      path: "/chef",
+    },
   ];
   return (
     <>

@@ -16,6 +16,7 @@ import { Orders } from "../submodules/Orders.jsx";
 
 import Register from "./components/Register.jsx";
 import { Menu } from "../submodules/Menu.jsx";
+import { ChefPage } from "../submodules/ChefPage.jsx";
 
 function App() {
   const location = useLocation();
@@ -35,14 +36,17 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/">
             <Route index element={<OperationPage />} />
+
             <Route index element={<TableInventory />} />
             <Route path="withdrawals" element={<Withdrawals />} />
             <Route path="inventario" element={<Inventory />}>
+                
               <Route index element={<TableInventory />} />
               <Route path="withdrawals" element={<Withdrawals />} />
             </Route>
             <Route path="menu" element={<Menu />} />
             <Route path="pedidos" element={<Orders />} />
+            <Route path="chef" element={<ChefPage />} />
           </Route>
 
           <Route path="/administracion">

@@ -59,10 +59,22 @@
   border: 1px solid #f9e79f;
 }
 
-.status-badge-premium.completado {
+.status-badge-premium.Pagado {
   background-color: #d5f5e3;
   color: #27ae60;
   border: 1px solid #abebc6;
+}
+
+.status-badge-premium.en.proceso {
+  background-color: #d6eaf8;
+  color: #2980b9;
+  border: 1px solid #aed6f1;
+}
+
+.status-badge-premium.Listo {
+  background-color: #e8daef;
+  color: #8e44ad;
+  border: 1px solid #d7bde2;
 }
 
 .order-actions-premium {
