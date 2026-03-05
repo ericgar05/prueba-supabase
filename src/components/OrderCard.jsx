@@ -2,7 +2,7 @@ import { ChefHat, CheckIcon } from "../assets/Icons/Icons";
 import { useOrders } from "../contexts/OrderContext";
 import "./styles/OrderCard.css";
 
-export const OrderCard = ({ order }) => {
+export const OrderCard = ({ order, isChef }) => {
   const { handleUpdateOrderStatus } = useOrders();
 
   const formatDate = (dateString) => {
@@ -27,7 +27,13 @@ export const OrderCard = ({ order }) => {
           alt="Orden"
         />
         <div className={`status-badge-premium ${order.status || "pendiente"}`}>
-          {order.status || "pendiente"}
+          {order.status === "pendiente" 
+            ? "Por pagar" 
+            : order.status === "Listo"
+            ? (isChef ? "Platillo terminado" : "Pedido terminado")
+            : order.status === "en proceso"
+            ? (isChef ? "en proceso" : "platillo en proceso")
+            : order.status}
         </div>
       </section>
 
@@ -55,14 +61,39 @@ export const OrderCard = ({ order }) => {
         </section>
       </div>
 
-      {order.status !== "completado" && (
+      {!isChef && order.status !== "Pagado" && order.status !== "Listo" && order.status !== "en proceso" && (
         <div className="order-actions-premium">
           <button
             className="btn-complete-order-premium"
-            onClick={() => handleUpdateOrderStatus(order.id, "completado")}
+            onClick={() => handleUpdateOrderStatus(order.id, "Pagado")}
           >
             <CheckIcon className="btn-icon-premium" />
-            <span>Completar Pedido</span>
+            <span>Pedido Pagado</span>
+          </button>
+        </div>
+      )}
+
+      {isChef && order.status === "Pagado" && (
+        <div className="order-actions-premium">
+          <button
+            className="btn-complete-order-premium"
+            onClick={() => handleUpdateOrderStatus(order.id, "en proceso")}
+          >
+            <ChefHat className="btn-icon-premium" />
+            <span>Comenzar platillo</span>
+          </button>
+        </div>
+      )}
+
+      {isChef && order.status === "en proceso" && (
+        <div className="order-actions-premium">
+          <button
+            className="btn-complete-order-premium"
+            style={{ backgroundImage: "linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)" }}
+            onClick={() => handleUpdateOrderStatus(order.id, "Listo")}
+          >
+            <CheckIcon className="btn-icon-premium" />
+            <span>Terminar platillo</span>
           </button>
         </div>
       )}

@@ -6,13 +6,18 @@ import "./styles/Orders.css";
 export function Orders() {
   const { ordersData } = useOrders();
 
+  // Renderizamos todos los pedidos para la lista de órdenes 
+  const visibleOrders = ordersData.filter(
+    (order) => order.status === "pendiente" || order.status === "Pagado" || order.status === "en proceso" || order.status === "Listo"
+  );
+
   return (
     <main className="orders-page">
       <section className="orders-container">
-        {ordersData.map((order) => (
+        {visibleOrders.map((order) => (
           <OrderCard key={order.id} order={order} />
         ))}
-        {ordersData.length === 0 && (
+        {visibleOrders.length === 0 && (
           <div className="no-orders">
             <p>No hay pedidos registrados.</p>
           </div>
