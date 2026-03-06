@@ -49,9 +49,7 @@ export const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     setUserData({});
     setIsAuthenticated(false);
-    localStorage.removeItem("userSession");
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("lastPath");
+    localStorage.clear();
     navigate("/login");
   };
 
