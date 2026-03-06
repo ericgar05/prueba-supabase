@@ -6,26 +6,45 @@ import "./styles/Orders.css";
 export const ChefPage = () => {
   const { ordersData } = useOrders();
 
-  const chefOrders = ordersData.filter(
-    (order) =>
-      order.status === "Pagado" ||
-      order.status === "en proceso" ||
-      order.status === "Listo",
+  const ordersToDo = ordersData.filter(
+    (order) => order.status === "Pagado" || order.status === "en proceso",
   );
+
+  const ordersDone = ordersData.filter((order) => order.status === "Listo");
 
   return (
     <main className="orders-page">
       <BackButton />
-      <section className="orders-container">
-        {chefOrders.map((order) => (
-          <OrderCard key={order.id} order={order} isChef={true} />
-        ))}
-        {chefOrders.length === 0 && (
-          <div className="no-orders">
-            <p>No hay pedidos listos para preparar (Pendientes de pago).</p>
-          </div>
-        )}
-      </section>
+
+      <div className="chef-sections">
+        <h2 className="chef-section-title">Por Hacer</h2>
+        <section className="orders-container">
+          {ordersToDo.length > 0 ? (
+            ordersToDo.map((order) => (
+              <OrderCard key={order.id} order={order} isChef={true} />
+            ))
+          ) : (
+            <div className="no-orders">
+              <p>No hay pedidos pendientes de preparar.</p>
+            </div>
+          )}
+        </section>
+
+        <h2 className="chef-section-title" style={{ marginTop: "2rem" }}>
+          Completados
+        </h2>
+        <section className="orders-container">
+          {ordersDone.length > 0 ? (
+            ordersDone.map((order) => (
+              <OrderCard key={order.id} order={order} isChef={true} />
+            ))
+          ) : (
+            <div className="no-orders">
+              <p>No hay pedidos completados aún.</p>
+            </div>
+          )}
+        </section>
+      </div>
     </main>
   );
 };

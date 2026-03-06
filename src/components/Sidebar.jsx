@@ -10,18 +10,17 @@ import {
   ExitIcons,
 } from "../assets/Icons/Icons";
 import { useAuth } from "../contexts/AuthContext";
+import { hasAccess } from "../utils/rbac";
 
 export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const { handleLogout } = useAuth();
+  const { handleLogout, userData } = useAuth();
   const handleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
   const links = [
     { to: "/", name: "operaciones", icon: <Utensils /> },
     { to: "/administracion", name: "Administracion", icon: <BriefCase /> },
-
-    // { "/personas", "Operaciones" },
-  ];
+  ].filter((link) => hasAccess(userData?.roles, link.to));
 
   return (
     <aside className={!sidebarOpen ? "minimized" : ""}>

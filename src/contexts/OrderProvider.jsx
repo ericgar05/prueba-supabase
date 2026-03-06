@@ -51,7 +51,11 @@ export const OrderProvider = ({ children }) => {
       return;
     }
 
-    sileo.success(`Pedido #${orderId} actualizado a ${newStatus}`);
+    if (newStatus === "Pagado") {
+      sileo.success("Orden pagada");
+    } else {
+      sileo.success(`Pedido #${orderId} actualizado a ${newStatus}`);
+    }
     setOrdersData((prev) =>
       prev.map((order) =>
         order.id === orderId ? { ...order, status: newStatus } : order,

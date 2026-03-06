@@ -1,8 +1,11 @@
 import ModuleDescription from "../components/ModuleDescription";
 import { ModulesCard } from "../components/ModulesCard";
 import { DollarBill, PersonMoney } from "../assets/Icons/Icons";
+import { useAuth } from "../contexts/AuthContext";
+import { hasAccess } from "../utils/rbac";
 import "../index.css";
 export const AdministracionPage = () => {
+  const { userData } = useAuth();
   const DataCard = [
     {
       icon: <PersonMoney />,
@@ -10,7 +13,7 @@ export const AdministracionPage = () => {
       description: "Gestion de Nomina & Personal",
       path: "/administracion/nomina",
     },
-  ];
+  ].filter((card) => hasAccess(userData?.roles, card.path));
   return (
     <>
       <ModuleDescription

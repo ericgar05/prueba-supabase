@@ -36,11 +36,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/">
             <Route index element={<OperationPage />} />
-
-            <Route index element={<TableInventory />} />
-            <Route path="withdrawals" element={<Withdrawals />} />
             <Route path="inventario" element={<Inventory />}>
-                
               <Route index element={<TableInventory />} />
               <Route path="withdrawals" element={<Withdrawals />} />
             </Route>

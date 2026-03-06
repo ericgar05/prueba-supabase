@@ -6,9 +6,12 @@ import {
   ShoppingIcon,
   CartArrowIcon,
 } from "../assets/Icons/Icons";
+import { useAuth } from "../contexts/AuthContext";
+import { hasAccess } from "../utils/rbac";
 import "../index.css";
 
 export const OperationPage = () => {
+  const { userData } = useAuth();
   const CardData = [
     {
       icon: <InventoryIcon />,
@@ -34,7 +37,7 @@ export const OperationPage = () => {
       description: "Pedidos en Cocina",
       path: "/chef",
     },
-  ];
+  ].filter((card) => hasAccess(userData?.roles, card.path));
   return (
     <>
       <ModuleDescription

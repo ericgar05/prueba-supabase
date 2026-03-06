@@ -41,7 +41,7 @@ export const AddIngredients = ({
     ? searchStock(formData.nombre) -
       listItem
         .filter((item) => item.nombre === formData.nombre)
-        .reduce((sum, item) => sum + item.cantidad, 0)
+        .reduce((sum, item) => sum + Number(item.cantidad), 0)
     : 0;
 
   const handleSubmit = async () => {
@@ -79,15 +79,18 @@ export const AddIngredients = ({
     handleToggleModal();
   };
   const handleAddIngredients = () => {
-    if (formData.cantidad > stockDisponible) {
+    const qty = Number(formData.cantidad);
+    if (qty > stockDisponible) {
       sileo.error("No hay suficiente stock");
       return;
     }
-    setListItem([...listItem, formData]);
-    sileo.success({ title: "Ingrediente agregado exitosamente" });
+    setListItem([...listItem, { ...formData, cantidad: qty }]);
+    sileo.success("Ingrediente agregado exitosamente");
     setFormData({
       nombre: "",
+      product_id: "",
       cantidad: "",
+      unidad: "",
     });
   };
   return (
