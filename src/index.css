@@ -82,8 +82,18 @@ body {
 .outlet-container {
   grid-column: 1;
   width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  transition: padding 0.3s ease-in-out;
   @media (min-width: 768px) {
     grid-column: 2;
+    padding: 0 4rem;
+  }
+}
+
+.main-container.active .outlet-container {
+  @media (min-width: 768px) {
+    padding: 0 1.5rem;
   }
 }
 /* .outlet-container {

@@ -1,18 +1,24 @@
 import { useOrders } from "../src/contexts/OrderContext";
 import { OrderCard } from "../src/components/OrderCard";
 import { ChefHat } from "../src/assets/Icons/Icons";
+import { BackButton } from "../src/components/BackButton";
 import "./styles/Orders.css";
 
 export function Orders() {
   const { ordersData } = useOrders();
 
-  // Renderizamos todos los pedidos para la lista de órdenes 
+  // Renderizamos todos los pedidos para la lista de órdenes
   const visibleOrders = ordersData.filter(
-    (order) => order.status === "pendiente" || order.status === "Pagado" || order.status === "en proceso" || order.status === "Listo"
+    (order) =>
+      order.status === "pendiente" ||
+      order.status === "Pagado" ||
+      order.status === "en proceso" ||
+      order.status === "Listo",
   );
 
   return (
     <main className="orders-page">
+      <BackButton />
       <section className="orders-container">
         {visibleOrders.map((order) => (
           <OrderCard key={order.id} order={order} />

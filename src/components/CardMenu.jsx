@@ -1,28 +1,24 @@
 import { useState } from "react";
 import "./styles/CardMenu.css";
-import { EditIcon, TrashIcon } from "../assets/Icons/Icons";
+import { EditIcon, EyeIcon, EyeOffIcon } from "../assets/Icons/Icons";
 import { useMenu } from "../contexts/MenuContext";
 import { EditMenu } from "./EditMenu";
 
 export function CardMenu({ menu }) {
-  const { handleDeleteMenu } = useMenu();
+  const { handleUpdateMenuStatus } = useMenu();
   const [toggleEditModal, setToggleEditModal] = useState(false);
 
   const handleToggleEditModal = () => {
     setToggleEditModal(!toggleEditModal);
   };
 
-  const onDelete = () => {
-    if (
-      window.confirm(`¿Estás seguro de que quieres eliminar "${menu.name}"?`)
-    ) {
-      handleDeleteMenu(menu.id);
-    }
+  const onViewClick = () => {
+    handleUpdateMenuStatus(menu.id, !menu.status);
   };
 
   return (
     <>
-      <main className="card-menu">
+      <main className={`card-menu ${menu.status ? "viewed" : ""}`}>
         <section className="img-container-menu">
           <img src={menu.image} alt={menu.name} />
         </section>
@@ -38,8 +34,11 @@ export function CardMenu({ menu }) {
             <button className="btn-edit" onClick={handleToggleEditModal}>
               <EditIcon />
             </button>
-            <button className="btn-delete" onClick={onDelete}>
-              <TrashIcon />
+            <button
+              className={`btn-view ${menu.status ? "active" : ""}`}
+              onClick={onViewClick}
+            >
+              {menu.status ? <EyeOffIcon /> : <EyeIcon />}
             </button>
           </section>
         </div>

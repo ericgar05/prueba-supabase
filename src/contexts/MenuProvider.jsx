@@ -34,6 +34,7 @@ export const MenuProvider = ({ children }) => {
       description: menu.description,
       image: menu.image,
       category_id: menu.category_id,
+      status: menu.status,
     }));
     setMenusData(menuData);
   };
@@ -89,6 +90,19 @@ export const MenuProvider = ({ children }) => {
     fetchMenu();
   };
 
+  const handleUpdateMenuStatus = async (id, newStatus) => {
+    const { error } = await supabase
+      .from("menus")
+      .update({ status: newStatus })
+      .eq("id", id);
+    if (error) {
+      sileo.error("Error al actualizar el estado");
+      return;
+    }
+    sileo.success({ title: "Estado actualizado exitosamente" });
+    fetchMenu();
+  };
+
   const handleUpdateMenu = async (id, formDataMenu) => {
     const { error } = await supabase
       .from("menus")
@@ -116,6 +130,7 @@ export const MenuProvider = ({ children }) => {
         handleSaveIngredients,
         handleDeleteMenu,
         handleUpdateMenu,
+        handleUpdateMenuStatus,
         fetchMenu,
         menusData,
         categories,

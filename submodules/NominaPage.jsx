@@ -6,6 +6,7 @@ import supabase from "../src/api/supaBase.js";
 import { CardContainer } from "../src/components/CardContainer";
 import { useState, useEffect } from "react";
 import { Modal } from "../src/components/Modal.jsx";
+import { BackButton } from "../src/components/BackButton.jsx";
 
 const initialFormState = {
   name: "",
@@ -79,6 +80,7 @@ export const NominaPage = () => {
 
   return (
     <div className="nomina-page">
+      <BackButton />
       <h1>Nomina &amp; Personal</h1>
       <CardContainer empleados={empleados} onUpdate={getEmpleados} />
 

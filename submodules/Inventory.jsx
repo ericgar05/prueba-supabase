@@ -5,6 +5,7 @@ import { InventoryIcon } from "../src/assets/Icons/Icons.jsx";
 import Header from "../src/components/Header.jsx";
 import { Preview } from "../src/components/Preview.jsx";
 import supabase from "../src/api/supaBase.js";
+import { BackButton } from "../src/components/BackButton.jsx";
 import "./Inventory.css";
 
 export function Inventory() {
@@ -70,6 +71,7 @@ export function Inventory() {
   };
   return (
     <main className="inventory-container">
+      <BackButton />
       <section className="stats-container">
         {stats.map((stat, index) => (
           <StatsCard

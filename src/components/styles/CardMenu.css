@@ -21,6 +21,17 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 
+.card-menu.viewed {
+  opacity: 0.6;
+  filter: grayscale(80%);
+  border: 2px solid #ccc;
+}
+
+.card-menu.viewed:hover {
+  opacity: 0.8;
+  filter: grayscale(40%);
+}
+
 .img-container-menu {
   width: 100%;
   height: 180px;
@@ -112,10 +123,11 @@
 }
 
 .actions-menu .btn-edit svg,
-.actions-menu .btn-delete svg {
+.actions-menu .btn-view svg {
   width: 16px;
   height: 16px;
   fill: #444;
+  color: #444;
 }
 
 .btn-edit:hover {
@@ -126,10 +138,11 @@
   fill: white !important;
 }
 
-.btn-delete:hover {
-  background: #e74c3c !important;
+.btn-view:hover {
+  background: #3498db !important; /* Blue for view */
 }
 
-.btn-delete:hover svg {
-  fill: white !important;
+.btn-view:hover svg {
+  fill: none !important;
+  color: white !important;
 }
